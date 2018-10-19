@@ -1,0 +1,26 @@
+<ion-menu [content]="nav">
+    <ion-header>
+        <ion-toolbar color="orange">
+            <ion-title>Menu 
+                <ion-icon name="user"></ion-icon>
+            </ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list >
+            <button ion-item menuClose
+            *ngFor="let pagina of paginas"
+            (click)="nextPage(pagina.pagina)">
+                <ion-icon [name]="pagina.icon"></ion-icon>
+                {{pagina.descricao}}
+            </button>  
+           
+            <button ion-item (click)="exit()">
+                <ion-icon name="ios-log-out"></ion-icon>
+                Sair
+            </button>     
+
+        </ion-list>
+    </ion-content>
+</ion-menu>
+<ion-nav #nav [root]="rootPage"></ion-nav>

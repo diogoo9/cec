@@ -1,0 +1,27 @@
+
+
+<ion-content  padding>  
+    <br>
+    <img class="imgLogin" src="../../assets/imgs/cem.png">
+        <br>
+        <ion-item class="campoLogin">
+            <ion-label floating ><ion-icon name="person"></ion-icon> Usuario</ion-label>
+            <ion-input type="text" #m [(ngModel)]="menbro.nome"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item class="campoLogin">
+            <ion-label floating><ion-icon name="key"></ion-icon> Senha</ion-label>
+            <ion-input type="password" [(ngModel)]="menbro.senha"></ion-input>
+        </ion-item>
+        <br>
+        <p></p>
+        <button back ion-button full round color="orange" (click)="login()">                
+            Login
+        </button> 
+        <p text-center>ou</p>
+        <button back ion-button full round color="light" (click)="recSenha()">                
+            Recuperar senha
+        </button>
+ 
+
+</ion-content>
