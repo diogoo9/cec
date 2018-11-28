@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { Menbro } from '../../model/Menbro';
 import { MenbrosProvider } from '../../providers/menbros/menbros';
+import { MenbroAddPage } from '../menbro-add/menbro-add';
 
 /**
  * Generated class for the MenbrosPage page.
@@ -32,33 +33,20 @@ export class MenbrosPage {
   }
 
   getM() {
-    this.MenbrosProvider.getMenbros().then((dados) => {
-      
-      dados.forEach((dado) => {
-        this.menbros.push({
-          id: dado.id_menbro,
-          id_discipulador: dado.id_discipulador,
-          nome: dado.nome,
-          rg: dado.rg,
-          cpf: dado.cpf,
-          email: dado.email,
-          celular: dado.celular,
-          nascimento: dado.nascimento,
-          rua: dado.rua,
-          num: dado.num,
-          bairro: dado.bairro,
-          cidade: dado.cidade,
-          estado: dado.estado 
-        })
-      });
-    })
 
+    this.menbros = this.MenbrosProvider.get();
+    console.log(this.menbros.length);
+  }
+  goMenbro(menbro: Menbro) {
+    this.navCtrl.push(MenbroAddPage, menbro);
+  }
+  addMenbro() {
+    this.navCtrl.setRoot(MenbroAddPage);
   }
 
 
   ionViewDidLoad() {
 
-    console.log(this.menbros.length);
     this.menuCtrl.enable(true);
     this.getM();
 

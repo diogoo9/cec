@@ -9,8 +9,6 @@ import { LoginProvider } from '../../providers/login/login';
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-
   menbro: Menbro = new Menbro();
 
   constructor(public navCtrl: NavController, public menuCtrl: MenuController, public LoginProvider: LoginProvider, public toast: ToastController) {
@@ -24,26 +22,26 @@ export class HomePage {
     toast.present();
   }
 
-
-
   login() {
-
+    
+    if (this.menbro.nome == undefined || this.menbro.senha == undefined || this.menbro.senha == "" || this.menbro.nome == "") {        
+      this.aviso('preencha os canpos');
+    }else{
     this.LoginProvider.autenticar(this.menbro.nome, this.menbro.senha).then((dado) => {
-      
-      if (this.menbro.nome == undefined || this.menbro.senha == undefined) {
-        this.aviso('preencha os canpos');
-      } else if (dado[0] == undefined) {
+    
+      if (dado[0] == undefined ) {
         this.aviso('usuario ou senha incorreta');
-      } else {
+      }else {
         this.navCtrl.setRoot(InicioPage);
       }
       //this.navCtrl.setRoot(InicioPage);
     })
+    }       
   };
 
 
   ionViewDidLoad() {
-    this.menuCtrl.enable(false);
+    this.menuCtrl.enable(true);
   }
 
 

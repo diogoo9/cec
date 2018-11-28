@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { MenbrosPage } from '../pages/menbros/menbros';
 import { InicioPage } from '../pages/inicio/inicio';
+import { ChamadasPage } from '../pages/chamadas/chamadas';
 @Component({
   templateUrl: 'app.html'
 })
@@ -14,7 +15,7 @@ export class MyApp {
 
   paginas: {descricao: string, pagina: any, icon: string}[]= [
     {descricao: "menbros", pagina: MenbrosPage, icon: "person"},
-    {descricao: "célula", pagina: MenbrosPage, icon: "people"}
+    {descricao: "Chamadas", pagina: ChamadasPage, icon: "people"}
   ]
 
   @ViewChild('nav')

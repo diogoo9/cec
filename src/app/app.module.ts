@@ -11,6 +11,11 @@ import { MenbrosPageModule } from '../pages/menbros/menbros.module';
 import { MenbrosProvider } from '../providers/menbros/menbros';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginProvider } from '../providers/login/login';
+import { MenbroPageModule } from '../pages/menbro/menbro.module';
+import { ChamadasPageModule } from '../pages/chamadas/chamadas.module';
+import { ChamadasProvider } from '../providers/chamadas/chamadas';
+import { MenbroAddPageModule } from '../pages/menbro-add/menbro-add.module';
+import { ChamadaAddPageModule } from '../pages/chamada-add/chamada-add.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,11 @@ import { LoginProvider } from '../providers/login/login';
     IonicModule.forRoot(MyApp),
     HttpClientModule,
     InicioPageModule,
-    MenbrosPageModule
+    MenbrosPageModule,
+    MenbroPageModule,
+    ChamadasPageModule,
+    MenbroAddPageModule,
+    ChamadaAddPageModule
     
   ],
   bootstrap: [IonicApp],
@@ -35,7 +44,8 @@ import { LoginProvider } from '../providers/login/login';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MenbrosProvider,
-    LoginProvider
+    LoginProvider,
+    ChamadasProvider
   ]
 })
 export class AppModule {}

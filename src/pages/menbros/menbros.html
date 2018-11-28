@@ -16,25 +16,23 @@
 
 
 <ion-content padding>
-
+  <button ion-button ion-end (click)="addMenbro()"> + cadastrar</button>
   <ion-list>
     <ion-item-sliding *ngFor="let menbro of menbros">
       <ion-item>
         <ion-avatar item-start>
-          <img src="../../assets/imgs/avatar.png">
+        <img src="../../assets/imgs/avatar.png">
         </ion-avatar>
         <h2>{{ menbro.nome }} </h2>
         <p>{{menbro.email}}</p>
       </ion-item>
-      <button ion-button clear item-end>View</button>
-      
       <ion-item-options side="right">
-        <button ion-button color="secondary" (click)="teste()">
+        <button ion-button color="secondary" (click)="goMenbro(menbro)">
           <ion-icon name="create"></ion-icon>
           Editar
         </button>
       </ion-item-options>
-      
+
     </ion-item-sliding>
 
 
