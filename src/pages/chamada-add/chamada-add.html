@@ -19,27 +19,28 @@
 <ion-content padding>
   <ion-item>
     <ion-label stacked>Descrição</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-input type="text" [(ngModel)]="chamada.dsc"></ion-input>
   </ion-item>
   
   <ion-item>
     <ion-label stacked>Data</ion-label>
-    <ion-input type="date">{{date| date:'dd/MM/yyyy HH:mm:ss'}}</ion-input>
+    <ion-input type="date" [(ngModel)]="chamada.data"></ion-input>
   </ion-item>
   <br>
   <ion-title center>Menbros</ion-title>
   <br>
-  <ion-list>
+  <ion-list id="freqMenbro[].id_freq">
     <ion-item-sliding *ngFor="let menbro of menbros">
       <ion-item>
         <ion-avatar item-start>
           <img src="../../assets/imgs/avatar.png">
         </ion-avatar>
         <ion-label>{{ menbro.nome }}</ion-label>
-        <ion-checkbox item-end [(ngModel)]="menbro.id"></ion-checkbox>        
-      </ion-item>      
+        <ion-checkbox item-end  [(ngModel)]="menbro.id" ></ion-checkbox>        
+      </ion-item>            
     </ion-item-sliding>
   </ion-list>
+  <button ion-button block (click)="add()">Finalizar</button>
 
 
 </ion-content>

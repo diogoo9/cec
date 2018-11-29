@@ -17,10 +17,13 @@ export class MenbrosProvider {
 
 
 
-  get() {
+  get(){
     this.menbros = [];
-    this.http.get('http://192.168.56.1:3000/menbros').toPromise().then((dados) => {
-      dados.forEach((dado) => {
+    this.http.get('http://192.168.56.1:3000/menbros').
+    toPromise().then((dados: any[]) =>{      
+     
+    dados.forEach((dado) => {
+        console.log(dado.id_menbro);
         this.menbros.push({
           id: dado.id_menbro,
           id_discipulador: dado.id_discipulador,
