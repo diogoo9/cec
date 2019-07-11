@@ -1,52 +1,40 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Menbro } from '../../model/Menbro';
+import { AppModule } from '../../app/app.module';
 
-/*
-  Generated class for the MenbrosProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class MenbrosProvider {
   menbros: Menbro[] = [];
+  url: String = AppModule.getEndPoint();
+  
   constructor(public http: HttpClient) {
     console.log('Hello MenbrosProvider Provider');
   }
 
 
 
-  get(){
+  get():Promise<any> {
     this.menbros = [];
-    this.http.get('http://192.168.56.1:3000/menbros').
-    toPromise().then((dados: any[]) =>{      
-     
-    dados.forEach((dado) => {
-        console.log(dado.id_menbro);
-        this.menbros.push({
-          id: dado.id_menbro,
-          id_discipulador: dado.id_discipulador,
-          nome: dado.nome,
-          rg: dado.rg,
-          cpf: dado.cpf,
-          email: dado.email,
-          celular: dado.celular,
-          nascimento: dado.nascimento,
-          rua: dado.rua,
-          num: dado.num,
-          bairro: dado.bairro,
-          cidade: dado.cidade,
-          estado: dado.estado
-        })
-      });
-    });
-    return this.menbros;
+   return this.http.get(`${this.url}/menbros/`).
+      toPromise().then();
+  }
+
+  getMembroFromIdCelula(id){
+    this.menbros = [];
+    return this.http.get(`${this.url}/menbrosFromIdCelula/${id}`).toPromise().then();
+  }
+
+  getMembroFormId(id):Promise<any> {
+    this.menbros = [];
+   return this.http.get(`${this.url}/chamada/${id}`).
+      toPromise().then();
   }
 
   save(menbro: Menbro): Promise<any> {
     console.log(menbro);
-    return this.http.post('http://192.168.56.1:3000/menbro/', menbro, {
+    return this.http.post(`${this.url}/menbro/`, menbro, {
       headers: { 'Content-Type': 'application/json' }
     }).toPromise().then(data => {
 
@@ -59,13 +47,14 @@ export class MenbrosProvider {
 
   update(menbro: Menbro): Promise<any> {
     console.log(menbro);
-    return this.http.put('http://192.168.56.1:3000/menbro/', menbro, {
+    return this.http.put(`${this.url}/menbro/`, menbro, {
       headers: { 'Content-Type': 'application/json' }
     }).toPromise().then(data => {
-      
+      return data;
     }).catch((err) => {
       console.log(err);
     })
   }
 
+  
 }

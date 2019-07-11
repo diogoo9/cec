@@ -18,38 +18,38 @@ import { MenbroAddPage } from '../menbro-add/menbro-add';
 })
 export class MenbrosPage {
   menbros: Menbro[] = [];
-
-  /* menbros: Menbro[] = [
-     new Menbro(1,1,"Diogo","985247-55","147.258.369-10","rua x ","teste@teste.com","(82) 99999-8888"),
-     new Menbro(1,1,"Lemuel","985247-55","147.258.369-10","rua x ","teste@teste.com","(82) 99999-8888"),
-     new Menbro(1,1,"Edvan","985247-55","147.258.369-10","rua x ","teste@teste.com","(82) 99999-8888"),
-     new Menbro(1,1,"Erick","985247-55","147.258.369-10","rua x ","teste@teste.com","(82) 99999-8888"),
-   ];
-   */
-
-
+  membrosbkp: Menbro[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, private MenbrosProvider: MenbrosProvider) {
   }
 
   getM() {
+    this.MenbrosProvider.get().then((dados) => {
+      dados.forEach((dado) => {
+        this.menbros.push(dado);
+      });
 
-    this.menbros = this.MenbrosProvider.get();
-    console.log(this.menbros.length);
+    })
+    this.membrosbkp = this.menbros;
   }
   goMenbro(menbro: Menbro) {
     this.navCtrl.push(MenbroAddPage, menbro);
   }
   addMenbro() {
-    this.navCtrl.setRoot(MenbroAddPage);
+    this.navCtrl.push(MenbroAddPage);
   }
 
 
   ionViewDidLoad() {
-
     this.menuCtrl.enable(true);
     this.getM();
-
+    console.log(this.menbros);
+  }
+  search(val ) {
+    console.log(val.target.value);
+    this.menbros = this.membrosbkp.filter((membro)=>{
+      return membro.nome.includes(val.target.value);
+    })
   }
 
 }

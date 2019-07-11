@@ -1,27 +1,35 @@
-
-
-<ion-content  padding>  
+<ion-content padding class="container">
     <br>
     <img class="imgLogin" src="../../assets/imgs/cem.png">
-        <br>
-        <ion-item class="campoLogin">
-            <ion-label floating ><ion-icon name="person"></ion-icon> Usuario</ion-label>
-            <ion-input type="text" #m [(ngModel)]="menbro.nome"></ion-input>
-        </ion-item>
-        <br>
-        <ion-item class="campoLogin">
-            <ion-label floating><ion-icon name="key"></ion-icon> Senha</ion-label>
-            <ion-input type="password" [(ngModel)]="menbro.senha"></ion-input>
-        </ion-item>
-        <br>
-        <p></p>
-        <button back ion-button full round color="orange" (click)="login()">                
-            Login
-        </button> 
-        <p text-center>ou</p>
-        <button back ion-button full round color="light" (click)="recSenha()">                
-            Recuperar senha
-        </button>
- 
+    <br>
+    <ion-item style="border-radius: 10px">
+        <ion-label stacked>
+            <ion-icon name="person"></ion-icon> Usuario
+        </ion-label>
+        <ion-input type="text" #m [(ngModel)]="menbro.nome" style="font-size: 20px"></ion-input>
+    </ion-item>
+    <br>
+
+
+    <!-- <ion-icon name="person" color="dark" style="font-size: 70px"></ion-icon> -->
+
+    <ion-item style="border-radius: 10px; margin: 0px">
+        <ion-label stacked>
+            <ion-icon name="key"></ion-icon> Password
+        </ion-label>
+        <ion-input type="password" [(ngModel)]="menbro.senha" style="font-size: 20px"></ion-input>
+    </ion-item>
+
+
+    <br>
+    <p></p>
+    <button back ion-button full round color="orange" (click)="login()" style="height: 40px">
+        Login
+    </button>
+
+    <button back ion-button full round color="light" (click)="recSenha()" style="display: none">
+        Recuperar senha
+    </button>
+
 
 </ion-content>

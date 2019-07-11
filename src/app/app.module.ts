@@ -16,6 +16,10 @@ import { ChamadasPageModule } from '../pages/chamadas/chamadas.module';
 import { ChamadasProvider } from '../providers/chamadas/chamadas';
 import { MenbroAddPageModule } from '../pages/menbro-add/menbro-add.module';
 import { ChamadaAddPageModule } from '../pages/chamada-add/chamada-add.module';
+import { CelulaProvider } from '../providers/celula/celula';
+import { LocalizacoesProvider } from '../providers/localizacoes/localizacoes';
+import { BrMaskerModule } from 'brmasker-ionic-3';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,7 @@ import { ChamadaAddPageModule } from '../pages/chamada-add/chamada-add.module';
   ],
   imports: [
     BrowserModule,
+    BrMaskerModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
     InicioPageModule,
@@ -31,7 +36,9 @@ import { ChamadaAddPageModule } from '../pages/chamada-add/chamada-add.module';
     MenbroPageModule,
     ChamadasPageModule,
     MenbroAddPageModule,
-    ChamadaAddPageModule
+    ChamadaAddPageModule,
+    IonicStorageModule.forRoot()
+   
     
   ],
   bootstrap: [IonicApp],
@@ -45,7 +52,20 @@ import { ChamadaAddPageModule } from '../pages/chamada-add/chamada-add.module';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MenbrosProvider,
     LoginProvider,
-    ChamadasProvider
+    ChamadasProvider,
+    CelulaProvider,
+    LocalizacoesProvider
   ]
 })
-export class AppModule {}
+export class AppModule {
+  
+  private static url: string = "http://192.168.137.1:3000";
+  private static token: String = "";
+  
+
+  static getEndPoint(){
+    return this.url;
+  }
+
+ 
+}

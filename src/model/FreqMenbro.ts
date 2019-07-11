@@ -1,4 +1,5 @@
 export class FreqMenbro {
-    public id_freq?: number
-    public id_menbro?: number
+    public id: number
+    public present: boolean
+    public nome: String
 }

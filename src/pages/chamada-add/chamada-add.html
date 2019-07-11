@@ -5,42 +5,50 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar color="orange">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title> + Chamada</ion-title>
+    <ion-title> Chamada</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
   <ion-item>
     <ion-label stacked>Descrição</ion-label>
-    <ion-input type="text" [(ngModel)]="chamada.dsc"></ion-input>
+    <ion-input type="text" [(ngModel)]="chamada.dsc" value="{{chamada.dsc}}" required  ></ion-input>
   </ion-item>
   
   <ion-item>
     <ion-label stacked>Data</ion-label>
-    <ion-input type="date" [(ngModel)]="chamada.data"></ion-input>
+    <ion-input type="date" [(ngModel)]="chamada.data" value="{{chamada.data}}"></ion-input>
   </ion-item>
   <br>
   <ion-title center>Menbros</ion-title>
   <br>
-  <ion-list id="freqMenbro[].id_freq">
-    <ion-item-sliding *ngFor="let menbro of menbros">
+
+<ion-list>
+  <ion-item>
+    <ion-label>Célula</ion-label>
+    <ion-select (ionChange)="che($event)">
+      <ion-option  *ngFor = "let celula of celulas"  value="{{celula.id_celula}}" >{{celula.nome}}</ion-option>      
+    </ion-select>
+  </ion-item>
+</ion-list>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let fre of freq">
       <ion-item>
         <ion-avatar item-start>
           <img src="../../assets/imgs/avatar.png">
         </ion-avatar>
-        <ion-label>{{ menbro.nome }}</ion-label>
-        <ion-checkbox item-end  [(ngModel)]="menbro.id" ></ion-checkbox>        
+        <ion-label>  {{fre.nome}}</ion-label>
+        <ion-checkbox item-end  [(ngModel)]="fre.present"  ></ion-checkbox>        
       </ion-item>            
     </ion-item-sliding>
   </ion-list>
   <button ion-button block (click)="add()">Finalizar</button>
-
-
+   <!-- fab placed to the top end -->
+   
 </ion-content>

@@ -3,6 +3,7 @@ import { NavController, MenuController, Toast, ToastController } from 'ionic-ang
 import { InicioPage } from '../inicio/inicio';
 import { Menbro } from '../../model/Menbro';
 import { LoginProvider } from '../../providers/login/login';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
@@ -11,7 +12,7 @@ import { LoginProvider } from '../../providers/login/login';
 export class HomePage {
   menbro: Menbro = new Menbro();
 
-  constructor(public navCtrl: NavController, public menuCtrl: MenuController, public LoginProvider: LoginProvider, public toast: ToastController) {
+  constructor(public navCtrl: NavController, public menuCtrl: MenuController, public LoginPVD: LoginProvider, public toast: ToastController, private storage: Storage) {
 
   }
   aviso(msg: string) {
@@ -22,28 +23,38 @@ export class HomePage {
     toast.present();
   }
 
-  login() {
-    
-    if (this.menbro.nome == undefined || this.menbro.senha == undefined || this.menbro.senha == "" || this.menbro.nome == "") {        
+  async login() {
+    if (this.menbro.nome == undefined || this.menbro.senha == undefined || this.menbro.senha == "" || this.menbro.nome == "") {
       this.aviso('preencha os canpos');
-    }else{
-    this.LoginProvider.autenticar(this.menbro.nome, this.menbro.senha).then((dado) => {
-    
-      if (dado[0] == undefined ) {
-        this.aviso('usuario ou senha incorreta');
-      }else {
-        this.navCtrl.setRoot(InicioPage);
+    } else {
+      try {
+        let dados = await this.LoginPVD.logar(this.menbro.nome, this.menbro.senha).then();        
+        if(dados.token){
+          this.storage.set('token',dados.token);
+          this.navCtrl.setRoot(InicioPage);
+        }
+
+      } catch (error) {
+        console.log(error);
       }
-      //this.navCtrl.setRoot(InicioPage);
-    })
-    }       
+      ;
+    }
   };
 
 
   ionViewDidLoad() {
     this.menuCtrl.enable(true);
+    this.verificaToken();
   }
 
+  async verificaToken(){
+    let token = await this.storage.get('token');
+    if(token){
+      console.log(token);
+      this.navCtrl.setRoot(InicioPage);
+    }else{
+    }
+  }
 
 
 }

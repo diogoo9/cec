@@ -1,9 +1,11 @@
+
 export class Menbro {
 
     public constructor(
         public id?: number,
         public id_discipulador?: number,
         public nome?: string,
+        public sexo?: string,
         public rg?: string,
         public cpf?: string,
         public email?: string,
@@ -14,6 +16,7 @@ export class Menbro {
         public bairro?: string,
         public cidade?: string,
         public estado?: string,
+        public tipo_sangue?: string,
         public senha?: string
         ) {
 
