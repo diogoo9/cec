@@ -1,101 +1,112 @@
 <ion-header>
-  <ion-navbar color="orange">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Cadastrar menbro</ion-title>
-  </ion-navbar>
+    <ion-navbar color="orange">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Cadastrar membro</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-  <ion-list>
+    <ion-list>
 
-    <ion-item>
-      <ion-label stacked>Nome</ion-label>
-      <ion-input type="text" [(ngModel)]="menbro.nome" value="{{ menbro.nome }}"></ion-input>
-    </ion-item>
+        <ion-list>
+            <ion-item>
+                <ion-label>Célula</ion-label>
+                <ion-select [(ngModel)]="menbro.id_celula">
+                    <ion-option *ngFor="let celula of celulas" value="{{celula.id_celula}}" >{{celula.nome}}</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
 
-    <ion-item>
-        <ion-label stacked>sexo</ion-label>
-        <ion-select [(ngModel)]="menbro.sexo" >
-          <ion-option *ngFor="let s of sexo" value="{{s}}" >{{s}}</ion-option>
-        </ion-select>
-      </ion-item>
+        <ion-item>
+            <ion-label stacked>Nome</ion-label>
+            <ion-input type="text" [(ngModel)]="menbro.nome" value="{{ menbro.nome }}"></ion-input>
+        </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Tipo de sangue</ion-label>
-      <ion-select [(ngModel)]="menbro.tipo_sangue" >
-        <ion-option *ngFor="let s of sangue" value="{{s}}" >{{s}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked>CPF</ion-label>
-      <ion-input type="text" [(ngModel)]="menbro.cpf" [brmasker]="{mask:'000.000.000-00', len:14}"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked>E-mail</ion-label>
-      <ion-input type="email" [(ngModel)]="menbro.email"></ion-input>
-    </ion-item>
+        <ion-item>
+            <ion-label stacked>sexo</ion-label>
+            <ion-select [(ngModel)]="menbro.sexo">
+                <ion-option *ngFor="let s of sexo" value="{{s}}">{{s}}</ion-option>
+            </ion-select>
+        </ion-item>
 
 
-    <ion-item>
-      <ion-label stacked>Celular</ion-label>
-      <ion-input type="tel" [(ngModel)]="menbro.celular" [brmasker]="{phone: true}"></ion-input>
-    </ion-item>
+        <ion-row>
+            <ion-item>
+                <ion-label stacked>Tipo de sangue</ion-label>
+                <ion-select [(ngModel)]="menbro.tipo_sangue">
+                    <ion-option *ngFor="let s of sangue" value="{{s}}">{{s}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Data de nascimento</ion-label>
+                <ion-input type="date" [(ngModel)]="menbro.nascimento "></ion-input>
+            </ion-item>
+        </ion-row>
 
-    <ion-item>
-      <ion-label stacked>Data de nascimento</ion-label>
-      <ion-input type="date" [(ngModel)]="menbro.nascimento "></ion-input>
-    </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Rua</ion-label>
-      <ion-input type="text" pattern="[0-9]{2} [0-9]{4}-[0-9]{4}" [(ngModel)]="menbro.rua"></ion-input>
-    </ion-item>
+        <ion-item>
+            <ion-label stacked>CPF</ion-label>
+            <ion-input type="text" [(ngModel)]="menbro.cpf" [brmasker]="{mask:'000.000.000-00', len:14}"></ion-input>
+        </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Número</ion-label>
-      <ion-input type="number" [(ngModel)]="menbro.num"></ion-input>
-    </ion-item>
+        <ion-item>
+            <ion-label stacked>E-mail</ion-label>
+            <ion-input type="email" [(ngModel)]="menbro.email"></ion-input>
+        </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Bairro</ion-label>
-      <ion-input type="text" [(ngModel)]="menbro.bairro"></ion-input>
-    </ion-item>
 
-    <br>
-    <ion-item>
-      <ion-label>Estado</ion-label>
-      <ion-select (ionChange)="carregarMunicipios($event)" [(ngModel)]="menbro.estado">
-        <ion-option *ngFor="let estado of estados" value="{{estado.uf}}" >{{estado.nome}}</ion-option>
-      </ion-select>
-    </ion-item>
+        <ion-item>
+            <ion-label stacked>Celular</ion-label>
+            <ion-input type="tel" [(ngModel)]="menbro.celular" [brmasker]="{phone: true}"></ion-input>
+        </ion-item>
 
-    <br>
-    <ion-item>
-      <ion-label>Cidade</ion-label>
-      <ion-select [(ngModel)]="menbro.cidade">
-        <ion-option *ngFor="let municipio of municipios" value="{{municipio.nome}}">{{municipio.nome}}</ion-option>
-      </ion-select>
-    </ion-item>
 
-    <!--   <ion-item>
+
+        <ion-item>
+            <ion-label stacked>Rua</ion-label>
+            <ion-input type="text" pattern="[0-9]{2} [0-9]{4}-[0-9]{4}" [(ngModel)]="menbro.rua"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Número</ion-label>
+            <ion-input type="number" [(ngModel)]="menbro.num"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Bairro</ion-label>
+            <ion-input type="text" [(ngModel)]="menbro.bairro"></ion-input>
+        </ion-item>
+
+        <br>
+        <ion-item>
+            <ion-label>Estado</ion-label>
+            <ion-select (ionChange)="carregarMunicipios($event)" [(ngModel)]="menbro.estado">
+                <ion-option *ngFor="let estado of estados" value="{{estado.uf}}">{{estado.nome}}</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <br>
+        <ion-item>
+            <ion-label>Cidade</ion-label>
+            <ion-select [(ngModel)]="menbro.cidade">
+                <ion-option *ngFor="let municipio of municipios" value="{{municipio.nome}}">{{municipio.nome}}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+
+        <!--   <ion-item>
       <ion-label stacked>Cidade</ion-label>
       <ion-input type="text" [(ngModel)]="menbro.cidade"></ion-input>
     </ion-item> -->
 
-    <ion-item *ngIf="menbro.id_membro == undefined">
-      <ion-label stacked>Senha</ion-label>
-      <ion-input type="text" [(ngModel)]="menbro.senha"></ion-input>
-    </ion-item>
 
-  </ion-list>
-  <div padding>
-    <button ion-button block (click)="insert()" *ngIf="menbro.id == undefined">Cadastrar</button>
-    <button ion-button block (click)="update()" *ngIf="menbro.id != undefined">SALVAR</button>
-  </div>
+    </ion-list>
+    <div padding>
+        <button ion-button block (click)="insert()" *ngIf="menbro.id == undefined">Cadastrar</button>
+        <button ion-button block (click)="update()" *ngIf="menbro.id != undefined">SALVAR</button>
+    </div>
 
 </ion-content>

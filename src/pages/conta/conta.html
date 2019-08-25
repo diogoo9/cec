@@ -1,0 +1,46 @@
+<!--
+  Generated template for the ContaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Conta</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label stacked>Nome</ion-label>
+    <ion-input type="" readonly [(ngModel)]="conta.nome"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Email</ion-label>
+    <ion-input type="text" [(ngModel)]="conta.email" readonly></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Senha atual</ion-label>
+    <ion-input type="password" [(ngModel)]="conta.currentPass"></ion-input>
+  </ion-item> 
+
+  <ion-item>
+    <ion-label stacked>Nova senha(min 5 caracteres)</ion-label>
+    <ion-input type="password" [(ngModel)]="conta.newPass"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Nova senha(confirmação)</ion-label>
+    <ion-input type="password" [(ngModel)]="conta.newPassConfirm"></ion-input>
+  </ion-item>
+
+  <button ion-button block color="dark" (click)="alterPass()">salvar</button>
+</ion-content>

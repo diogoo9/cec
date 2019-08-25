@@ -1,38 +1,44 @@
 <ion-header>
-  <ion-navbar color="orange">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>menbros</ion-title>
-  </ion-navbar>
+   <ion-navbar color="dark">
+      <button ion-button menuToggle>
+         <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>membros</ion-title>
+   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list>
+<ion-content padding> 
+   <ion-list>
       <ion-searchbar showCancelButton="never" (ionInput)="search($event)"></ion-searchbar>
-    <ion-item-sliding *ngFor="let menbro of menbros">
-      <ion-col width-75 *ngIf="menbros.length == 0">
-        
-      </ion-col>
       <ion-item>
-        <ion-avatar item-start>
-          <img src="../../assets/imgs/avatar.png">
-        </ion-avatar>
-        <h2>{{ menbro.nome }} </h2>
-        <p>{{menbro.email}}</p>
-      </ion-item>
-      <ion-item-options side="right">
-        <button ion-button color="secondary" (click)="goMenbro(menbro)">
-          <ion-icon name="create"></ion-icon>
-          Editar
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
-  <!--<button ion-button ion-end (click)="addMenbro()" > + cadastrar</button>-->
-  <ion-fab end bottom bottom>
-    <button ion-fab  (click)="addMenbro()" fixed>
-      <ion-icon name="add"></ion-icon>
-    </button>
-  </ion-fab>
+            <ion-label>Célula</ion-label>
+            <ion-select (ionChange)="getMembros($event)" [(ngModel)]="idCelula">
+               <ion-option *ngFor="let celula of celulas" value="{{celula.id_celula}}">{{celula.nome}}</ion-option>
+            </ion-select>
+         </ion-item>
+
+      <ion-item-sliding *ngFor="let menbro of menbros">
+         <ion-col width-75 *ngIf="menbros.length == 0">
+         </ion-col>
+         <ion-item (click)="goMenbro(menbro)">
+            <ion-avatar item-start>
+               <img src="../../assets/imgs/avatar.png">
+            </ion-avatar>
+            <h2>{{ menbro.nome }} </h2>
+            <p>{{menbro.email}}</p>
+         </ion-item>
+         <ion-item-options side="right">
+            <button ion-button color="secondary" (click)="goMenbro(menbro)">
+               <ion-icon name="create"></ion-icon>
+               Editar
+            </button>
+         </ion-item-options>
+      </ion-item-sliding>
+   </ion-list>
+   <!--<button ion-button ion-end (click)="addMenbro()" > + cadastrar</button>-->
+   <ion-fab end bottom bottom>
+      <button ion-fab color="dark" (click)="addMenbro()" fixed>
+         <ion-icon name="add"></ion-icon>
+      </button>
+   </ion-fab>
 </ion-content>

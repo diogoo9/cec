@@ -2,28 +2,41 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Chamada } from '../../model/Chamadas';
 import { AppModule } from '../../app/app.module';
+import { Storage } from '@ionic/storage';
 
 
 @Injectable()
 export class ChamadasProvider {
   url: String = AppModule.getEndPoint();
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, public storage: Storage) {
     console.log('Hello ChamadasProvider Provider');
   }
 
-  save(chamada: Chamada): Promise<any> {
-    console.log(chamada)
-    return this.http.post(`${this.url}/chamada/`, chamada, { 
-      headers: {  'Content-Type': 'application/json'  } 
-    }).toPromise().then(data => {  
+  async save(chamada: Chamada): Promise<any> {
+    console.log(chamada);
 
+    var token = await this.storage.get('token');
+    return this.http.post(`${this.url}/chamada/`, chamada, {
+      headers: { 'Content-Type': 'application/json', 'authorization': token }
+    }).toPromise().then(data => {
+      return data;
     }).catch((err) => {
-      console.log(err);
+      return err;
     })
   }
 
-  get():Promise<any>{
-    return this.http.get(`${this.url}/chamada/`).toPromise().then();
+  async get(idCelula): Promise<any> {
+    var token = await this.storage.get('token');
+    return this.http.get(`${this.url}/chamada/${idCelula}`,
+      { headers: { 'Content-Type': 'aplication/json', 'authorization': token } }
+    ).toPromise().then();
+  }
+
+  async getMembrosFromChamada(id) {
+    var token = await this.storage.get('token');
+    return this.http.get(`${this.url}/chamada/${id}`,
+      { headers: { 'Content-Type': 'aplication/json', 'authorization': token } }
+    ).toPromise().then();
   }
 
 }

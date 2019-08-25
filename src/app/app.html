@@ -4,8 +4,8 @@
             <ion-icon name="person" style="font-size: 70px"></ion-icon>
             <br>
             <h2>
-                <b>
-                    Diogo
+                <b (click)="editarConta(userName)">
+                    {{userName}}
                 </b>
             </h2>
         </ion-item>
@@ -21,6 +21,8 @@
                 <ion-icon name="exit"></ion-icon>
                 <b>Sair</b>
             </button>
+            <br>
+            <p class="version">v1.0</p>
 
         </ion-list>
     </ion-content>

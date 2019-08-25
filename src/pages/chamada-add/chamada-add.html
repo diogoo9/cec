@@ -17,12 +17,12 @@
 <ion-content padding>
   <ion-item>
     <ion-label stacked>Descrição</ion-label>
-    <ion-input type="text" [(ngModel)]="chamada.dsc" value="{{chamada.dsc}}" required  ></ion-input>
+    <ion-input type="text" [(ngModel)]="chamada.dsc" value="{{chamada.dsc}}"  disabled="{{this.noEditable}}" ></ion-input>
   </ion-item>
   
   <ion-item>
     <ion-label stacked>Data</ion-label>
-    <ion-input type="date" [(ngModel)]="chamada.data" value="{{chamada.data}}"></ion-input>
+    <ion-input type="date" [(ngModel)]="chamada.data" value="{{chamada.data}}" disabled="{{this.noEditable}}"></ion-input>
   </ion-item>
   <br>
   <ion-title center>Menbros</ion-title>
@@ -31,7 +31,7 @@
 <ion-list>
   <ion-item>
     <ion-label>Célula</ion-label>
-    <ion-select (ionChange)="che($event)">
+    <ion-select [(ngModel)]="chamada.id_celula" (ionChange)="che($event)" >
       <ion-option  *ngFor = "let celula of celulas"  value="{{celula.id_celula}}" >{{celula.nome}}</ion-option>      
     </ion-select>
   </ion-item>
@@ -44,11 +44,11 @@
           <img src="../../assets/imgs/avatar.png">
         </ion-avatar>
         <ion-label>  {{fre.nome}}</ion-label>
-        <ion-checkbox item-end  [(ngModel)]="fre.present"  ></ion-checkbox>        
+        <ion-checkbox item-end  [(ngModel)]="fre.present"  disabled="{{this.noEditable}}"></ion-checkbox>        
       </ion-item>            
     </ion-item-sliding>
   </ion-list>
-  <button ion-button block (click)="add()">Finalizar</button>
+  <button ion-button block (click)="add()" >Finalizar</button>
    <!-- fab placed to the top end -->
    
 </ion-content>

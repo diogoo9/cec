@@ -14,10 +14,20 @@
 </ion-header>
 
 <ion-content padding>
+  <script>
+    const controller = document.querySelector('ion-loading-controller');
+    function handleButtonClick() {
+      console.log('hi');
+      controller.create({
+        message: 'Please wait...',
+        duration: 3000
+      }).then(loading => loading.present());
+    }    
+  </script>
   <ion-list>
 
     <ion-item>
-      <ion-label stacked>Nome</ion-label>
+      <ion-label stacked>Nome1111</ion-label>
       <ion-input type="text" [ngModel]="menbro.nome"></ion-input>
     </ion-item>
 

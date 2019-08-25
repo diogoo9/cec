@@ -20,6 +20,7 @@ import { CelulaProvider } from '../providers/celula/celula';
 import { LocalizacoesProvider } from '../providers/localizacoes/localizacoes';
 import { BrMaskerModule } from 'brmasker-ionic-3';
 import { IonicStorageModule } from '@ionic/storage';
+import { ContaPageModule } from '../pages/conta/conta.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { IonicStorageModule } from '@ionic/storage';
     ChamadasPageModule,
     MenbroAddPageModule,
     ChamadaAddPageModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    ContaPageModule
    
     
   ],

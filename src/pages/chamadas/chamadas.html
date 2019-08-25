@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="orange">
+  <ion-navbar color="dark">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -9,32 +9,38 @@
 
 <ion-content padding>
   <button ion-button ion-end (click)="chamadaAdd()" style="display: none"> cadastrar</button>
+  <ion-item>
+    <ion-label>Célula</ion-label>
+    <ion-select (ionChange)="listarChamadas($event)">
+      <ion-option  *ngFor = "let celula of celulas"  value="{{celula.id_celula}}" >{{celula.nome}}</ion-option>      
+    </ion-select>
+  </ion-item>
   <ion-list>
-    <ion-item-sliding *ngFor=" let chamada of chamadas">
-      <ion-item (click)="goEdit()" style="margin: 15">
-        
+    <ion-item-sliding *ngFor=" let chamada of chamadas" (click)="goMembro(chamada)">
+      <ion-item style="margin: 15">
+        <ion-avatar item-end>
+          <img src="../../assets/imgs/ver.svg">
+        </ion-avatar>
         <h2><b>{{chamada.dsc}}</b></h2>
         <p>
-          <ion-icon name="calendar" color="dark"> </ion-icon>   {{chamada.data.substring(8,10)}}/{{chamada.data.substring(5,7)}}/{{chamada.data.substring(0,4)}}                   
+          Presentes: {{chamada.presents}}<ion-col> </ion-col> Faltas: {{chamada.faults}}
         </p>
-
         <p>
-          <ion-icon name="checkbox" color="secondary"></ion-icon> {{chamada.presents}}<ion-col > </ion-col>  <ion-icon name="close-circle" color="danger"></ion-icon> {{chamada.faults}}          
-        </p>        
+          <ion-icon name="calendar" color="dark"> </ion-icon>
+          {{chamada.data.substring(8,10)}}/{{chamada.data.substring(5,7)}}/{{chamada.data.substring(0,4)}}
+        </p>
       </ion-item>
-
       <ion-item-options side="right">
         <button ion-button color="secondary" (click)="goMembro(chamada)">
           <ion-icon name="create"></ion-icon>
           Editar
         </button>
       </ion-item-options>
-
     </ion-item-sliding>
   </ion-list>
   <ion-fab end bottom bottom>
-      <button ion-fab  (click)="chamadaAdd()" fixed>
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-fab>
+    <button ion-fab color="dark" (click)="chamadaAdd()" fixed>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>
