@@ -32,7 +32,7 @@ export class LoginProvider {
     async alterPass(conta): Promise<any> { 
         var token = await this.storage.get('token');
         return this.http.post(`${this.endPoint}/alterPassword/`, conta, {
-          headers: { 'Content-Type': 'application/json', 'authorization': token }
+          headers: { 'content-Type': 'application/json', 'authorization': token }
         }).toPromise().then(data => {
           return data;
         }).catch((err) => {
