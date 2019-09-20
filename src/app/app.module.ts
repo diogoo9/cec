@@ -61,7 +61,7 @@ import { ContaPageModule } from '../pages/conta/conta.module';
 })
 export class AppModule {
   
-  private static url: string = "http://192.168.137.1:3000";
+  private static url: string = "http://localhost:3000";
   private static token: String = "";  
 
   static getEndPoint(){

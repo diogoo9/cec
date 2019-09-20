@@ -143,8 +143,9 @@ export class MenbroAddPage {
 				if (dado.status == 0) {
 					this.presentAlert("Erro", "falha na comunicação com o servidor");
 				} else {
+
 					this.aviso("alteração salva com sucesso");
-					this.navCtrl.setRoot(MenbrosPage);
+					//this.navCtrl.setRoot(MenbrosPage);
 				}
 
 			}).catch((erro) => {

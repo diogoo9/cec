@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { AppModule } from '../../app/app.module';
 /*
   Generated class for the CelulaProvider provider.
 
@@ -9,8 +10,8 @@ import { Storage } from '@ionic/storage';
 */
 @Injectable()
 export class CelulaProvider {
-    url: String = "http://192.168.137.1:3000";
-
+    
+    url: String = AppModule.getEndPoint();
     constructor(public http: HttpClient, public storage: Storage) {
         console.log('Hello CelulaProvider Provider');
     }
