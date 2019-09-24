@@ -53,7 +53,7 @@ export class MenbrosProvider {
    async update(menbro: Menbro): Promise<any> {
       var token = await this.storage.get('token');
       return this.http.put(`${this.url}/menbro/`, menbro,
-         { headers: { 'Content-Type': 'aplication/json', 'authorization': token } }
+         { headers: { 'Content-Type': 'application/json' } }
       ).toPromise().then(data => {
          return data;
       }).catch((err) => {

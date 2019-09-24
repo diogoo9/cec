@@ -137,13 +137,11 @@ export class MenbroAddPage {
 		if (inputsNull) {
 			this.presentAlert("Aviso","preencha todos os campos");
 		} else {
-
 			this.MenbrosProvider.update(this.menbro).then((dado) => {
 				console.log(dado);
 				if (dado.status == 0) {
 					this.presentAlert("Erro", "falha na comunicação com o servidor");
 				} else {
-
 					this.aviso("alteração salva com sucesso");
 					//this.navCtrl.setRoot(MenbrosPage);
 				}
