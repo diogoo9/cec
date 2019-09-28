@@ -28,14 +28,18 @@ export class ChamadasProvider {
   async get(idCelula): Promise<any> {
     var token = await this.storage.get('token');
     return this.http.get(`${this.url}/chamada/${idCelula}`,
-      { headers: { 'Content-Type': 'aplication/json', 'authorization': token } }
-    ).toPromise().then();
+      { headers: { 'Content-Type': 'application/json', 'authorization': token } }
+    ).toPromise().then(data=>{
+       return data
+    }).catch(err=>{
+      return err;
+    })
   }
 
   async getMembrosFromChamada(id) {
     var token = await this.storage.get('token');
     return this.http.get(`${this.url}/chamada/${id}`,
-      { headers: { 'Content-Type': 'aplication/json', 'authorization': token } }
+      { headers: { 'Content-Type': 'application/json', 'authorization': token } }
     ).toPromise().then();
   }
 

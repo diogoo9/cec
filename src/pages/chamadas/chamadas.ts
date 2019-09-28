@@ -21,6 +21,7 @@ import { CelulaProvider } from '../../providers/celula/celula';
 export class ChamadasPage {
     chamadas: Chamada[] = [];
     celulas = [];
+    idCelula;
 
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
@@ -28,9 +29,10 @@ export class ChamadasPage {
         public ChamadasProvider: ChamadasProvider,
         private CelulaProvider: CelulaProvider) {
     }
-    getChamadas(idCelula) {
+    getChamadas() {
         this.chamadas = [];
-        this.ChamadasProvider.get(idCelula).then((calls) => {
+        this.ChamadasProvider.get(this.idCelula).then((calls) => {
+            console.log(calls);
             calls.forEach((chamada) => {
                 this.chamadas.push({
                     id: chamada.id_chamada,
@@ -55,7 +57,6 @@ export class ChamadasPage {
 
     getCelulas() {
         this.CelulaProvider.get().then((dados: any) => {
-            console.log(dados);
             dados.forEach(element => {
                 this.celulas.push(element);
             });
@@ -63,12 +64,14 @@ export class ChamadasPage {
     }
 
     listarChamadas(dado) {
-        this.getChamadas(dado);
+        console.log(dado);
+        this.getChamadas();
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad ChamadasPage');
         this.getCelulas();
+        this.getChamadas();
         console.log(this.celulas);
     }
 

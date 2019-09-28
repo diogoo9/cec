@@ -64,21 +64,7 @@ export class ChamadaAddPage {
       this.MenbrosProvider.getMembroFromIdCelula(this.chamada.id_celula).then((dados: any) => {
          dados.forEach((dado) => {
             this.freq.push({ id: dado.id, present: true, nome: dado.nome });
-            this.menbros.push({
-               id: dado.id,
-               id_discipulador: dado.id_discipulador,
-               nome: dado.nome,
-               id_celula: dado.id_celula,
-               cpf: dado.cpf,
-               email: dado.email,
-               celular: dado.celular,
-               nascimento: dado.nascimento,
-               rua: dado.rua,
-               num: dado.num,
-               bairro: dado.bairro,
-               cidade: dado.cidade,
-               estado: dado.estado,
-            });
+            this.menbros.push(dado);
          });
          if (this.menbros.length == 0) {
             this.aviso("nenhum Membro cadastrado na célula");
@@ -100,11 +86,7 @@ export class ChamadaAddPage {
             } else {
                this.freq.push({ id_membro: dado.id_menbro, present: true, nome: dado.nome });
             }
-            this.menbros.push({
-               id: dado.id,
-               nome: dado.nome
-
-            })
+            this.menbros.push(dado);
 
          });
       });
@@ -157,7 +139,6 @@ export class ChamadaAddPage {
    ionViewDidLoad() {
       console.log('ionViewDidLoad ChamadaAddPage');
       console.log(this.freq);
-      console.log(this.chamada);
       this.getCelulas();
       console.log(this.celulas);
    }

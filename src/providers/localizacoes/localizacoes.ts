@@ -14,14 +14,14 @@ export class LocalizacoesProvider {
     async getEstados() {
         var token = await this.storage.get('token');
         return this.http.get(`${this.url}/getEstados`,
-            { headers: { 'Content-Type': 'aplication/json', 'authorization': token } }
+            { headers: { 'Content-Type': 'application/json', 'authorization': token } }
         ).toPromise();
     }
 
     async getMunicipios(uf) {
         var token = await this.storage.get('token');
         return this.http.get(`${this.url}/getMunicipioFromUf/${uf}`,
-            { headers: { 'Content-Type': 'aplication/json', 'authorization': token } }
+            { headers: { 'Content-Type': 'application/json', 'authorization': token } }
         ).toPromise();
     }
 }

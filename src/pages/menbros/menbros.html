@@ -10,10 +10,10 @@
 <ion-content padding> 
    <ion-list>
       <ion-searchbar showCancelButton="never" (ionInput)="search($event)"></ion-searchbar>
-      <ion-item>
-            <ion-label>Célula</ion-label>
-            <ion-select (ionChange)="getMembros($event)" [(ngModel)]="idCelula">
-               <ion-option *ngFor="let celula of celulas" value="{{celula.id_celula}}">{{celula.nome}}</ion-option>
+      <ion-item style=" border: 2px 0px 2px 0px solid black; color: black; font-weight: 800">
+            <ion-label style="color: black">Célula</ion-label>
+            <ion-select (ionChange)="getMembros($event)" [(ngModel)]="idCelula" >
+               <ion-option *ngFor="let celula of celulas; let i = index" value="{{celula.id_celula}}" [selected]="i === 0">{{celula.nome}}</ion-option>
             </ion-select>
          </ion-item>
 
@@ -35,7 +35,7 @@
          </ion-item-options>
       </ion-item-sliding>
    </ion-list>
-   <!--<button ion-button ion-end (click)="addMenbro()" > + cadastrar</button>-->
+
    <ion-fab end bottom bottom>
       <button ion-fab color="dark" (click)="addMenbro()" fixed>
          <ion-icon name="add"></ion-icon>

@@ -13,13 +13,11 @@ export class MenbrosProvider {
       console.log('Hello MenbrosProvider Provider');
    }
 
-
-
    async get(idCelula): Promise<any> {
       this.menbros = [];
       var token = await this.storage.get('token');
       return this.http.get(`${this.url}/menbrosFromIdCelula/${idCelula}`,
-         { headers: { 'Content-Type': 'aplication/json', 'authorization': token } }
+         { headers: { 'Content-Type': 'application/json', 'authorization': token } }
       ).toPromise().then();
    }
 
@@ -27,7 +25,7 @@ export class MenbrosProvider {
       this.menbros = [];
       var token = await this.storage.get('token');
       return this.http.get(`${this.url}/menbrosFromIdCelula/${idCelula}`,
-         { headers: { 'Content-Type': 'aplication/json', 'authorization': token } }
+         { headers: { 'Content-Type': 'application/json', 'authorization': token } }
       ).toPromise().then();
    }
 
@@ -35,14 +33,15 @@ export class MenbrosProvider {
       this.menbros = [];
       var token = await this.storage.get('token');
       return this.http.get(`${this.url}/chamada/${id}`,
-         { headers: { 'Content-Type': 'aplication/json', 'authorization': token } }
+         { headers: { 'Content-Type': 'application/json', 'authorization': token } }
       ).toPromise().then();
    }
 
    async save(menbro: Menbro): Promise<any> {
+      console.log(menbro);
       var token = await this.storage.get('token');
       return this.http.post(`${this.url}/menbro/`, menbro,
-         { headers: { 'Content-Type': 'aplication/json', 'authorization': token } }
+         { headers: { 'Content-Type': 'application/json', 'authorization': token } }
       ).toPromise().then(data => {
          return data;
       }).catch((err) => {
@@ -53,7 +52,7 @@ export class MenbrosProvider {
    async update(menbro: Menbro): Promise<any> {
       var token = await this.storage.get('token');
       return this.http.put(`${this.url}/menbro/`, menbro,
-         { headers: { 'Content-Type': 'application/json' } }
+         { headers: { 'Content-Type': 'application/json', 'authorization': token  } }
       ).toPromise().then(data => {
          return data;
       }).catch((err) => {

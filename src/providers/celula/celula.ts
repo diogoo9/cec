@@ -19,14 +19,14 @@ export class CelulaProvider {
     async get(): Promise<any> {
         var token = await this.storage.get('token');
         return this.http.get(`${this.url}/getCelulas/`,
-            { headers: { 'Content-Type': 'aplication/json', 'authorization': token } }
+            { headers: { 'Content-Type': 'application/json', 'authorization': token } }
         ).toPromise().then();
     }
 
     async getCelulaFromLider(): Promise<any> {
         var token = await this.storage.get('token');
         return this.http.get(`${this.url}/celulaFromLider/`,
-            { headers: { 'Content-Type': 'aplication/json', 'authorization': token } }
+            { headers: { 'Content-Type': 'application/json', 'authorization': token } }
         ).toPromise().then((data => {
             return data;
         })

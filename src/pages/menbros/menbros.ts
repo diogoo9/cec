@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController, AlertController } from 'ionic-angular';
 import { Menbro } from '../../model/Menbro';
 import { MenbrosProvider } from '../../providers/menbros/menbros';
 import { MenbroAddPage } from '../menbro-add/menbro-add';
@@ -14,9 +14,9 @@ import { CelulaProvider } from '../../providers/celula/celula';
 export class MenbrosPage {
     menbros: Menbro[] = [];
     membrosbkp: Menbro[] = [];
-    isLoading = true;    
+    isLoading = true;
     celulas = [];
-    idCelula ;
+    idCelula;
 
     constructor(
         public navCtrl: NavController,
@@ -25,17 +25,31 @@ export class MenbrosPage {
         private MenbrosProvider: MenbrosProvider,
         public loadingController: LoadingController,
         private LoadingCtrl: LoadingController,
-        public CelulaProvider: CelulaProvider) {
+        public CelulaProvider: CelulaProvider,
+        public AlertCtrl: AlertController) {
     }
 
+    async alert(titulo, sub) {
+        const alert = await this.AlertCtrl.create({
+            title: titulo,
+            subTitle: sub,
+            buttons: ['ok']
+        });
+        await alert.present();
+    }
 
     getMembros() {
-        this.menbros =[];
+        this.menbros = [];
         this.MenbrosProvider.get(this.idCelula).then((dados) => {
-            dados.forEach((dado) => {
-                this.menbros.push(dado);
-                console.log(this.menbros);
-            });
+            if(dados.length == 0){
+                console.log("nenhum");
+                this.alert("Aviso","não existem dados para célula selecionada");
+            }else{
+                dados.forEach((dado) => {
+                    this.menbros.push(dado);
+                    console.log(this.menbros);
+                });
+            }            
             this.isLoading = false;
         })
         this.membrosbkp = this.menbros;
@@ -53,13 +67,13 @@ export class MenbrosPage {
         const loader = this.LoadingCtrl.create({
             content: "carraegando dados...",
         });
-        if(this.isLoading){
+        if (this.isLoading) {
             loader.present();
-        }else{
+        } else {
             loader.dismiss();
         }
     }
-   
+
     search(val) {
         console.log(val.target.value);
         this.menbros = this.membrosbkp.filter((membro) => {
@@ -74,14 +88,16 @@ export class MenbrosPage {
             });
         })
     }
-    listarMenbros(){
+    listarMenbros() {
         console.log(this.idCelula);
     }
 
     ionViewDidLoad() {
         this.menuCtrl.enable(true);
-        //this.getMembros();
         this.getCelulas();
+        console.log(this.celulas["'0'"]);
+        this.idCelula = 1;
+        this.getMembros();
     }
 
 
