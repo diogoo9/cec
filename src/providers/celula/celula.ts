@@ -16,11 +16,15 @@ export class CelulaProvider {
         console.log('Hello CelulaProvider Provider');
     }
 
-    async get(): Promise<any> {
+    async get(): Promise<Object> {
         var token = await this.storage.get('token');
         return this.http.get(`${this.url}/getCelulas/`,
             { headers: { 'Content-Type': 'application/json', 'authorization': token } }
-        ).toPromise().then();
+        ).toPromise().then(data=>{
+            return data;
+        }).catch(err=>{
+            return err;
+        });
     }
 
     async getCelulaFromLider(): Promise<any> {

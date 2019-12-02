@@ -15,7 +15,8 @@ export class MenbrosPage {
     menbros: Menbro[] = [];
     membrosbkp: Menbro[] = [];
     isLoading = true;
-    celulas = [];
+    celulas: Array<any> = [];
+    celulas2: Array<any> = ["1","2"];
     idCelula;
 
     constructor(
@@ -38,7 +39,7 @@ export class MenbrosPage {
         await alert.present();
     }
 
-    getMembros() {
+    getMembros() {         
         this.menbros = [];
         this.MenbrosProvider.get(this.idCelula).then((dados) => {
             if(dados.length == 0){
@@ -46,12 +47,14 @@ export class MenbrosPage {
                 this.alert("Aviso","não existem dados para célula selecionada");
             }else{
                 dados.forEach((dado) => {
+                    dado.nascimento = dado.nascimento.substr(0,10);
                     this.menbros.push(dado);
                     console.log(this.menbros);
                 });
             }            
             this.isLoading = false;
         })
+        this.idCelula = this.celulas[0];
         this.membrosbkp = this.menbros;
     }
 
@@ -80,24 +83,24 @@ export class MenbrosPage {
             return membro.nome.includes(val.target.value);
         })
     }
-    getCelulas() {
+    getCelulas() {        
         this.CelulaProvider.get().then((dados: any) => {
-            console.log(dados);
+        this.idCelula  = dados[0].id_celula;             
+        this.getMembros();
+        console.log(this.celulas);
             dados.forEach(element => {
                 this.celulas.push(element);
             });
         })
     }
+
     listarMenbros() {
         console.log(this.idCelula);
     }
 
     ionViewDidLoad() {
         this.menuCtrl.enable(true);
-        this.getCelulas();
-        console.log(this.celulas["'0'"]);
-        this.idCelula = 1;
-        this.getMembros();
+        this.getCelulas();   
     }
 
 

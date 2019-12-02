@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Toast, ToastController, AlertController } from 'ionic-angular';
 import { Menbro } from '../../model/Menbro';
 import { MenbrosProvider } from '../../providers/menbros/menbros';
-import { MenbrosPage } from '../menbros/menbros';
 import { LocalizacoesProvider } from '../../providers/localizacoes/localizacoes';
 import { BrMaskerIonic3 } from 'brmasker-ionic-3';
 import { CelulaProvider } from '../../providers/celula/celula';
@@ -22,6 +21,7 @@ export class MenbroAddPage {
    sexo = ["M", "F"];
    sangue = ["Ñs", "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
    celulas = [];
+   idEstado;
 
 
    constructor(
@@ -93,6 +93,7 @@ export class MenbroAddPage {
          this.MenbrosProvider.save(this.menbro).then((dado) => {
             console.log(dado);
             if (dado.status == 0) {
+               console.log(dado);
                this.menbro.id = undefined;
                this.presentAlert("Erro", "falha na comunicação com o servidor");
             } else {
@@ -135,6 +136,9 @@ export class MenbroAddPage {
    ionViewDidLoad() {
       this.getCelulas();
       this.carregarEstados();
+      if(this.menbro.estado){
+         this.carregarMunicipios(this.menbro.estado);
+      }
       console.log('ionViewDidLoad MenbroAddPage');
    }
 

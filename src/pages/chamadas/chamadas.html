@@ -11,8 +11,8 @@
   <button ion-button ion-end (click)="chamadaAdd()" style="display: none"> cadastrar</button>
   <ion-item style="font-weight: 800; color: black">
     <ion-label>Célula</ion-label>
-    <ion-select (ionChange)="listarChamadas($event)" [(ngModel)]="idCelula">
-      <ion-option  *ngFor = "let celula of celulas; let i = index"  value="{{celula.id_celula}}" [selected]="i === 0">{{celula.nome}}</ion-option>      
+    <ion-select (ionChange)="getChamadas()" [(ngModel)]="idCelula">
+      <ion-option  *ngFor = "let celula of celulas; let i = index"  value="{{celula.id_celula}}" [selected]="i === 0" >{{celula.nome}}</ion-option>      
     </ion-select>
   </ion-item>
   <ion-list>

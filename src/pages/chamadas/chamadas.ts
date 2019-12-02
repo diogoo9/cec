@@ -21,7 +21,7 @@ import { CelulaProvider } from '../../providers/celula/celula';
 export class ChamadasPage {
     chamadas: Chamada[] = [];
     celulas = [];
-    idCelula;
+    idCelula = 0;
 
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
@@ -32,19 +32,25 @@ export class ChamadasPage {
     getChamadas() {
         this.chamadas = [];
         this.ChamadasProvider.get(this.idCelula).then((calls) => {
-            console.log(calls);
-            calls.forEach((chamada) => {
-                this.chamadas.push({
-                    id: chamada.id_chamada,
-                    dsc: chamada.dsc,
-                    data: chamada.data.substring(0, 10),
-                    id_celula: chamada.id_celula,
-                    presents: chamada.presents,
-                    faults: chamada.faults,
-                    total: chamada.total
+            if (calls.length != 0) {
+                calls.forEach((chamada) => {
+                    console.log(chamada);
+                    this.chamadas.push({
+                        id: chamada.id_chamada,
+                        dsc: chamada.dsc,
+                        data: chamada.data.substring(0, 10),
+                        id_celula: chamada.id_celula,
+                        presents: chamada.presents,
+                        faults: chamada.faults,
+                        total: chamada.total
+                    });
                 });
-            });
-        })
+            }
+
+        }).catch(err=>{
+            console.log(err);
+        });
+        this.idCelula = this.celulas[0];
     }
 
     chamadaAdd() {
@@ -53,26 +59,21 @@ export class ChamadasPage {
 
     goMembro(chamada) {
         this.navCtrl.push(ChamadaAddPage, chamada);
-    }    
+    }
 
     getCelulas() {
         this.CelulaProvider.get().then((dados: any) => {
+            this.idCelula = dados[0].id_celula;
+            this.getChamadas();
             dados.forEach(element => {
                 this.celulas.push(element);
             });
         })
-    }
-
-    listarChamadas(dado) {
-        console.log(dado);
-        this.getChamadas();
-    }
+    }  
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad ChamadasPage');
         this.getCelulas();
-        this.getChamadas();
-        console.log(this.celulas);
     }
 
 }

@@ -38,8 +38,10 @@ export class ChamadaAddPage {
       if (this.navParams.data.id != undefined) {
          this.noEditable = true;
          this.chamada = this.navParams.data;
+         console.log(this.chamada);
          this.ChamadasProvider.getMembrosFromChamada(this.chamada.id).then((dados: any) => {
-            dados.forEach(dado => {
+            console.log(dados);
+            dados.forEach(dado => {               
                this.freq.push({
                   id: dado.id_membro,
                   present: dado.present,
@@ -118,7 +120,6 @@ export class ChamadaAddPage {
 
    add() {
       this.chamada.freq = this.freq;
-      console.log(this.chamada);
       if (!this.chamada.dsc) {
          this.aviso("Descrição é obrigatório");
       } else if (!this.chamada.data) {
@@ -138,9 +139,7 @@ export class ChamadaAddPage {
 
    ionViewDidLoad() {
       console.log('ionViewDidLoad ChamadaAddPage');
-      console.log(this.freq);
       this.getCelulas();
-      console.log(this.celulas);
    }
 
 }
